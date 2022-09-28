@@ -312,7 +312,7 @@ public :
 
 protected :
 
-    Serial     _cmd;
+    mbed::BufferedSerial _cmd;
     DigitalOut _rst;
     //used by printf
     virtual int _putc(int c) {
@@ -332,16 +332,9 @@ protected :
     int  getSTATUS   (char *, int);
     int  version     (void);
 #if DEBUGMODE
-    Serial pc;
+    mbed::BufferedSerial pc;
 #endif // DEBUGMODE
 };
 
 typedef unsigned char BYTE;
 #endif
-
-
-
-
-
-
-

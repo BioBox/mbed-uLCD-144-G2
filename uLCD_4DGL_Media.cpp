@@ -30,11 +30,8 @@ int uLCD_4DGL :: media_init()
     char command[1] = "";
     command[0] = MINIT;
     writeCOMMAND(command, 1);
-    while (!_cmd.readable()) wait_ms(TEMPO);              // wait for screen answer
-    if (_cmd.readable()) {
-        resp = _cmd.getc();           // read response
-        resp = resp << 8 + _cmd.getc();
-    }
+    while (!_cmd.readable()) wait_us(TEMPO);              // wait for screen answer
+    if (_cmd.readable()) _cmd.read(&resp, 2);
     return resp;
 }
 
@@ -74,11 +71,8 @@ char uLCD_4DGL :: read_byte()
     char command[1] = "";
     command[0] = READBYTE;
     writeCOMMAND(command, 1);
-    while (!_cmd.readable()) wait_ms(TEMPO);              // wait for screen answer
-    if (_cmd.readable()) {
-        resp = _cmd.getc();           // read response
-        resp = _cmd.getc();
-    }
+    while (!_cmd.readable()) wait_us(TEMPO);              // wait for screen answer
+    if (_cmd.readable()) _cmd.read(&resp, 1);
     return resp;
 }
 
@@ -89,11 +83,8 @@ int  uLCD_4DGL :: read_word()
     char command[1] = "";
     command[0] = READWORD;
     writeCOMMAND(command, 1);
-    while (!_cmd.readable()) wait_ms(TEMPO);              // wait for screen answer
-    if (_cmd.readable()) {
-        resp = _cmd.getc();           // read response
-        resp = resp << 8 + _cmd.getc();
-    }
+    while (!_cmd.readable()) wait_us(TEMPO);              // wait for screen answer
+    if (_cmd.readable()) _cmd.read(&resp, 2);
     return resp;
 }
 
